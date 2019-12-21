@@ -26,7 +26,13 @@ public class WECtrl {
 
         inputs.add(Input.key(Keyboard.KEY_V, Listener.pressed(() -> sendCommand("//paste")).requireCtrl()));
 
-        inputs.add(Input.key(Keyboard.KEY_X, Listener.pressed(() -> sendCommand("//cut")).requireCtrl()));
+        inputs.add(Input.key(Keyboard.KEY_X, Listener.pressed(() -> {
+            if (Input.isShiftDown()) {
+                sendCommand("//sel");
+            } else {
+                sendCommand("//cut");
+            }
+        }).requireCtrl()));
 
         inputs.add(Input.key(Keyboard.KEY_Z, Listener.pressed(() -> {
             if (Input.isShiftDown()) {
